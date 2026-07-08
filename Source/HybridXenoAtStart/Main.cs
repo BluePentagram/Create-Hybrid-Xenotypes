@@ -10,9 +10,6 @@ namespace HybridXenoTypesAtPawnCreation
     {
         static HybridXenosAtStart()
         {
-            Log.Message("Hybrid Pawns loaded successfully! Nothing Here!!!");
-
-            // *Uncomment for Harmony*
             Harmony harmony = new Harmony("BP_HybridXenoAtStart");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }

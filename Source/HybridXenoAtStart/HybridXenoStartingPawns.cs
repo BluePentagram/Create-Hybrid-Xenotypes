@@ -12,25 +12,29 @@ namespace HybridXenoTypesAtPawnCreation
     public static class HybridXenoStartingPawns
     {
         [HarmonyPostfix]
-        public static void HybridButton(Rect rect, int pawnIndex, bool renderClothes, bool renderHeadgear)
+        public static void HybridButton(Rect rect, int pawnIndex)
 
         {
             if (!ModsConfig.BiotechActive)
             {
                 return;
             }
+            List<Pawn> StartingAndOptionalPawns = Find.GameInitData.startingAndOptionalPawns;
+            Pawn pawn = StartingAndOptionalPawns[pawnIndex];
+            if (pawn.genes.Xenotype == XenotypeDefOf.Baseliner)
+            {
+                return;
+            }
             //float BottomButSize = 250f; //Page.BottomButSize
             Vector2 BottomButSize = new Vector2(150f, 38f); // Copyed from Page
             Text.Font = GameFont.Small;
-            float x = (rect.width - BottomButSize.x) / 3f;
+            float x = (rect.width);
             float y = rect.y + rect.height - 38f;
-            List<Pawn> StartingAndOptionalPawns = Find.GameInitData.startingAndOptionalPawns;
 
             if (Widgets.ButtonText(new Rect(x, y, BottomButSize.x, BottomButSize.y), "Create Hybrid"))
             {
-                Pawn pawn = StartingAndOptionalPawns[pawnIndex];
                 string XenoName = pawn.genes.XenotypeLabel;
-                List<FloatMenuOption> list = new List<FloatMenuOption> { };
+                List<FloatMenuOption> list = new List<FloatMenuOption>{};
                 foreach (XenotypeDef item in DefDatabase<XenotypeDef>.AllDefs.OrderBy((XenotypeDef xenotypeDef) => 0f - xenotypeDef.displayPriority))
                 {
                     XenotypeDef xenoType = item;
@@ -39,7 +43,7 @@ namespace HybridXenoTypesAtPawnCreation
                     {
                         list.Add(new FloatMenuOption(xenoType.LabelCap, delegate
                         {
-                            HybridXenosAtStart.ApplyGenes(pawn, xenoType.AllGenes, !xenoType.inheritable, XenoName, xenoType.defName);
+                            HybridXenosAtStart.ApplyGenes(pawn, xenoType.AllGenes, !xenoType.inheritable, XenoName, xenoType.LabelCap);
                         }, xenoType.Icon, XenotypeDef.IconColor, MenuOptionPriority.Default, delegate (Rect r)
                         {
                             TooltipHandler.TipRegion(r, xenoType.descriptionShort ?? xenoType.description);
