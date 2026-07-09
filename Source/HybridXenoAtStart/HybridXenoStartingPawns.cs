@@ -21,7 +21,7 @@ namespace HybridXenoTypesAtPawnCreation
             }
             List<Pawn> StartingAndOptionalPawns = Find.GameInitData.startingAndOptionalPawns;
             Pawn pawn = StartingAndOptionalPawns[pawnIndex];
-            if (pawn.genes.Xenotype == XenotypeDefOf.Baseliner)
+            if (pawn.genes.Xenotype == XenotypeDefOf.Baseliner && !pawn.genes.UniqueXenotype)
             {
                 return;
             }
@@ -39,7 +39,7 @@ namespace HybridXenoTypesAtPawnCreation
                 {
                     XenotypeDef xenoType = item;
 
-                    if (xenoType != XenotypeDefOf.Baseliner)
+                    if (xenoType != XenotypeDefOf.Baseliner && xenoType != pawn.genes.Xenotype)
                     {
                         list.Add(new FloatMenuOption(xenoType.LabelCap, delegate
                         {
