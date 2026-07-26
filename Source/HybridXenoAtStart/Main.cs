@@ -30,7 +30,7 @@ namespace HybridXenoTypesAtPawnCreation
             if (pawn.genes.hybrid == false)
             {
                 pawn.genes.hybrid = true;
-                pawn.genes.xenotypeName = XenoName + "-" + HybridXenoName;
+                pawn.genes.xenotypeName = "BPHybridPrefix".Translate() + HybridXenoName + "BPHybridSuffix".Translate();
             }
         }
     }
