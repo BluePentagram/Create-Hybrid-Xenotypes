@@ -14,3 +14,11 @@ Source/.vs/
 Source/bin/
 Source/obj/
 Source/packages/
+
+/.vscode/obj
+/*.sln 
+/*/Assemblies/*.pdb
+
+# /*/Assemblies
+# /.vscode
+# /Source
