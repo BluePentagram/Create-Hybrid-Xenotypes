@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace HybridXenoTypesAtPawnCreation
+namespace HybridXenoAtStart
 {
     [HarmonyPatch(typeof(StartingPawnUtility), "DrawPortraitArea")]
     public static class HybridXenoStartingPawns
@@ -26,9 +25,9 @@ namespace HybridXenoTypesAtPawnCreation
                 return;
             }
             //float BottomButSize = 250f; //Page.BottomButSize
-            Vector2 BottomButSize = new Vector2(150f, 38f); // Copyed from Page
+            Vector2 BottomButSize = new(150f, 38f); // Copyed from Page
             Text.Font = GameFont.Small;
-            float x = (rect.width);
+            float x = rect.width;
             float y = rect.y + rect.height - 38f;
 
             if (Widgets.ButtonText(new Rect(x, y, BottomButSize.x, BottomButSize.y), "Create Hybrid"))
@@ -43,7 +42,7 @@ namespace HybridXenoTypesAtPawnCreation
                     {
                         list.Add(new FloatMenuOption(xenoType.LabelCap, delegate
                         {
-                            HybridXenosAtStart.ApplyGenes(pawn, xenoType.AllGenes, !xenoType.inheritable, XenoName, xenoType.LabelCap);
+                            HybridXenosAtStart.ApplyGenes(pawn, xenoType.AllGenes, !xenoType.inheritable);
                         }, xenoType.Icon, XenotypeDef.IconColor, MenuOptionPriority.Default, delegate (Rect r)
                         {
                             TooltipHandler.TipRegion(r, xenoType.descriptionShort ?? xenoType.description);
@@ -55,7 +54,7 @@ namespace HybridXenoTypesAtPawnCreation
                     CustomXenotype customInner = customXenotype;
                     list.Add(new FloatMenuOption(customInner.name.CapitalizeFirst() + " (" + "Custom".Translate() + ")", delegate
                     {
-                        HybridXenosAtStart.ApplyGenes(pawn, customInner.genes, !customInner.inheritable, XenoName, customInner.fileName);
+                        HybridXenosAtStart.ApplyGenes(pawn, customInner.genes, !customInner.inheritable);
                     }, customInner.IconDef.Icon, XenotypeDef.IconColor, MenuOptionPriority.Default, delegate (Rect r)
                     {
                     }, null, 0, extraPartRightJustified: true));

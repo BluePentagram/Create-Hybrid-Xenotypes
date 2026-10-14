@@ -1,27 +1,27 @@
 {
     "version": "2.0.0",
     "tasks": [
+	{
+			"label": "SaveAllFiles",
+			"command": "${command:workbench.action.files.saveAll}",
+			"type": "shell",
+			"problemMatcher": []
+		},
         {
-            "label": "BuildWindowsDLL",
-            "type": "shell",
+            "label": "build",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/Source/HybridXenoStarting.csproj"
+            ],
+            "problemMatcher": "$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": [
-                "dotnet build .vscode"
-            ],
-        },
-        {
-            "label": "BuildLinuxDLL",
-            "type": "shell",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "command": [
-                "dotnet build .vscode"
-            ],
+			"dependsOrder": "sequence",
+            "dependsOn": "SaveAllFiles"
         }
     ]
 }

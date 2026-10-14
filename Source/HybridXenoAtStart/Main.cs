@@ -3,19 +3,20 @@ using System.Reflection;
 using HarmonyLib;
 using Verse;
 
-namespace HybridXenoTypesAtPawnCreation
+namespace HybridXenoAtStart
 {
     [StaticConstructorOnStartup]
     public static class HybridXenosAtStart
     {
         static HybridXenosAtStart()
         {
-            Harmony harmony = new Harmony("BP_HybridXenoAtStart");
+            Harmony harmony = new("BP_HybridXenoAtStart");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
-        public static void ApplyGenes(Pawn pawn, List<GeneDef> genes, bool Xenogene, string XenoName, string HybridXenoName)
+        public static void ApplyGenes(Pawn pawn, List<GeneDef> genes, bool Xenogene )
         {
+            var oldname = pawn.genes.XenotypeLabelCap;
             foreach (GeneDef geneDef in genes)
             {
                 if (Xenogene && !pawn.genes.HasXenogene(geneDef)) 
@@ -30,7 +31,7 @@ namespace HybridXenoTypesAtPawnCreation
             if (pawn.genes.hybrid == false)
             {
                 pawn.genes.hybrid = true;
-                pawn.genes.xenotypeName = "BPHybridPrefix".Translate() + HybridXenoName + "BPHybridSuffix".Translate();
+                pawn.genes.xenotypeName = "BPHybridPrefix".Translate() + oldname + "BPHybridSuffix".Translate();
             }
         }
     }
