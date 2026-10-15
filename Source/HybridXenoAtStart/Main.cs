@@ -14,7 +14,7 @@ namespace HybridXenoAtStart
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
-        public static void ApplyGenes(Pawn pawn, List<GeneDef> genes, bool Xenogene )
+        public static void ApplyXenotype(Pawn pawn, List<GeneDef> genes, bool Xenogene )
         {
             var oldname = pawn.genes.XenotypeLabelCap;
             foreach (GeneDef geneDef in genes)
@@ -28,7 +28,7 @@ namespace HybridXenoAtStart
                     pawn.genes.AddGene(geneDef, Xenogene);
                 }
             }
-            if (pawn.genes.hybrid == false)
+            if (!pawn.genes.hybrid)
             {
                 pawn.genes.hybrid = true;
                 pawn.genes.xenotypeName = "BPHybridPrefix".Translate() + oldname + "BPHybridSuffix".Translate();

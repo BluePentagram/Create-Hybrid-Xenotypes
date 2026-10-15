@@ -8,7 +8,7 @@ using Verse;
 namespace HybridXenoAtStart
 {
     [HarmonyPatch(typeof(StartingPawnUtility), "DrawPortraitArea")]
-    public static class HybridXenoStartingPawns
+    public static class HybridXenosAtStartHarmonyPatch
     {
         [HarmonyPostfix]
         public static void HybridButton(Rect rect, int pawnIndex)
@@ -42,7 +42,7 @@ namespace HybridXenoAtStart
                     {
                         list.Add(new FloatMenuOption(xenoType.LabelCap, delegate
                         {
-                            HybridXenosAtStart.ApplyGenes(pawn, xenoType.AllGenes, !xenoType.inheritable);
+                            HybridXenosAtStart.ApplyXenotype(pawn, xenoType.AllGenes, !xenoType.inheritable);
                         }, xenoType.Icon, XenotypeDef.IconColor, MenuOptionPriority.Default, delegate (Rect r)
                         {
                             TooltipHandler.TipRegion(r, xenoType.descriptionShort ?? xenoType.description);
@@ -54,7 +54,7 @@ namespace HybridXenoAtStart
                     CustomXenotype customInner = customXenotype;
                     list.Add(new FloatMenuOption(customInner.name.CapitalizeFirst() + " (" + "Custom".Translate() + ")", delegate
                     {
-                        HybridXenosAtStart.ApplyGenes(pawn, customInner.genes, !customInner.inheritable);
+                        HybridXenosAtStart.ApplyXenotype(pawn, customInner.genes, !customInner.inheritable);
                     }, customInner.IconDef.Icon, XenotypeDef.IconColor, MenuOptionPriority.Default, delegate (Rect r)
                     {
                     }, null, 0, extraPartRightJustified: true));
