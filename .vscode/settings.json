@@ -1,3 +1,5 @@
 {
-    "dotnet.preferCSharpExtension": true
+    "files.exclude": {
+        "**/Source/Art": true
+    },    "dotnet.preferCSharpExtension": true
 }

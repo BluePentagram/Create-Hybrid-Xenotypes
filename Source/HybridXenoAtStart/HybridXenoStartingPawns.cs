@@ -24,13 +24,13 @@ namespace HybridXenoAtStart
             {
                 return;
             }
-            //float BottomButSize = 250f; //Page.BottomButSize
-            Vector2 BottomButSize = new(150f, 38f); // Copyed from Page
+            Vector2 BottomButSize = new(38f, 38f); // Copyed from Page
             Text.Font = GameFont.Small;
-            float x = rect.width;
+            float x = rect.xMax - BottomButSize.x;
             float y = rect.y + rect.height - 38f;
 
-            if (Widgets.ButtonText(new Rect(x, y, BottomButSize.x, BottomButSize.y), "Create Hybrid"))
+            Texture2D HybridIcon = ContentFinder<Texture2D>.Get("HybridXenotypeIcon");
+            if (Widgets.ButtonImage(new Rect(x, y, BottomButSize.x, BottomButSize.y), HybridIcon,true,"BPCreateHybrid".Translate()))
             {
                 string XenoName = pawn.genes.XenotypeLabel;
                 List<FloatMenuOption> list = new List<FloatMenuOption>{};

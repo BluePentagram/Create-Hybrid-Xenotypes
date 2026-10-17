@@ -13,8 +13,10 @@
                 "preLaunchTask": "build",
             },
             "linux": {
-                "runtimeExecutable": "steam",
-                "runtimeArgs": ["-applaunch", "294100"],
+                "runtimeExecutable": "sh",
+                "runtimeArgs": [ 
+                    "-c", "if [ -f ./run.sh ]; then ./run.sh; else ./RimWorld; fi"
+                ],
                 "preLaunchTask": "build",
             }
         },  
